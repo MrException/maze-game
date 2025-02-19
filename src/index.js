@@ -5,7 +5,11 @@ import { mySketch } from './sketch.js'
 // Import CSS styles in JavaScript
 import './index.css'
 
+import { generateMaze } from './maze-generator.js'
+
 console.log('Hello from JavaScript!')
+
+console.log(generateMaze(49, 49))
 
 // Initialize p5.js
 // p5 requires two arguments: new p5(sketch function, target DOM element)
