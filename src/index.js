@@ -9,7 +9,8 @@ import { generateMaze } from './maze-generator.js'
 
 console.log('Hello from JavaScript!')
 
-console.log(generateMaze(49, 49))
+const maze = generateMaze(49, 49);
+console.log('Generated maze:', maze);
 
 // Initialize p5.js
 // p5 requires two arguments: new p5(sketch function, target DOM element)
