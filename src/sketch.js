@@ -4,8 +4,11 @@ export const mySketch = (p) => {
   let maze;
   let cellSize;
   let player;
+  let gameState = 'playing'; // playing, won, countdown
+  let countdownTime = 0;
   const mazeSize = 15; // Initial maze size
   const padding = 50; // Padding around the maze
+  const countdownDuration = 5; // seconds
   const keys = {
     UP: 38,
     RIGHT: 39,
@@ -99,6 +102,38 @@ export const mySketch = (p) => {
       cellSize * 0.8
     );
     
+    // Check win condition
+    if (player.x === maze.end.x && player.y === maze.end.y && gameState === 'playing') {
+      gameState = 'won';
+      countdownTime = p.millis() + (countdownDuration * 1000);
+      console.log('Won! Starting countdown...');
+    }
+
+    // Handle countdown and reset
+    if (gameState === 'won') {
+      const timeLeft = Math.ceil((countdownTime - p.millis()) / 1000);
+      
+      if (timeLeft <= 0) {
+        // Reset game with larger maze
+        const newSize = Math.min(maze.width + 10, 100);
+        maze = generateMaze(newSize, newSize);
+        player = {
+          x: maze.start.x,
+          y: maze.start.y
+        };
+        gameState = 'playing';
+      } else {
+        // Draw win message and countdown
+        p.textAlign(p.CENTER, p.CENTER);
+        p.textSize(32);
+        p.fill(0);
+        p.noStroke();
+        p.text('You win!', p.width/2, p.height/2 - 20);
+        p.textSize(24);
+        p.text(`New maze in ${timeLeft}...`, p.width/2, p.height/2 + 20);
+      }
+    }
+
     p.pop();
   };
 
@@ -124,6 +159,9 @@ export const mySketch = (p) => {
 
   // Handle keyboard input for player movement
   p.keyPressed = () => {
+    // Disable movement during countdown
+    if (gameState !== 'playing') return false;
+    
     const currentCell = maze.grid[player.y][player.x];
     
     switch (p.keyCode) {

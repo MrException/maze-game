@@ -7,7 +7,7 @@
   - [x] Create `styles.css`.
   - [x] Create `main.js`.
 
-- [ ] **HTML Setup**
+- [x] **HTML Setup**
   - [x] Link the p5.js library.
   - [x] Link `main.js` and `styles.css`.
   - [x] Add a container element for the canvas.
@@ -16,9 +16,9 @@
   - [x] Basic styling for page layout.
   - [x] Ensure canvas container is centered and sized correctly.
 
-- [ ] **p5.js Initialization**
-  - [ ] Set up a 500×500 canvas in `main.js`.
-  - [ ] Display a test message (e.g., “Hello, Canvas!”) on the canvas.
+- [x] **p5.js Initialization**
+  - [x] Set up a 500×500 canvas in `main.js`.
+  - [x] Display a test message (e.g., “Hello, Canvas!”) on the canvas.
 
 ## 2. Maze Generation Module
 - [x] **Define Maze Data Structure**
@@ -59,19 +59,19 @@
   - [x] Log movement events to validate behavior.
 
 ## 5. Win Condition and Game Loop
-- [ ] **Finish Square**
-  - [ ] Define and render a finish square (red) on the opposite side.
+- [x] **Finish Square**
+  - [x] Define and render a finish square (red) on the opposite side.
   
-- [ ] **Win Detection**
-  - [ ] Implement logic to detect when the player reaches the finish.
-  - [ ] Display a “You win!” message on win detection.
+- [x] **Win Detection**
+  - [x] Implement logic to detect when the player reaches the finish.
+  - [x] Display a “You win!” message on win detection.
 
-- [ ] **Countdown and Maze Reset**
-  - [ ] Start a 5-second countdown after winning.
-  - [ ] Disable player movement during the countdown.
-  - [ ] After the countdown, clear the current maze.
-  - [ ] Generate a new maze, increasing the size by 10 cells (up to 100×100).
-  - [ ] Log and test the entire game loop.
+- [x] **Countdown and Maze Reset**
+  - [x] Start a 5-second countdown after winning.
+  - [x] Disable player movement during the countdown.
+  - [x] After the countdown, clear the current maze.
+  - [x] Generate a new maze, increasing the size by 10 cells (up to 100×100).
+  - [x] Log and test the entire game loop.
 
 ## 6. Difficulty Slider and UI Enhancements
 - [ ] **Difficulty Slider**
