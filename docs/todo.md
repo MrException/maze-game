@@ -35,14 +35,14 @@
   - [x] Log or test that the maze is correctly generated.
 
 ## 3. Maze Rendering with p5.js
-- [ ] **Rendering Function**
-  - [ ] Write a function to draw the maze on the canvas.
-  - [ ] Calculate cell size dynamically to fit the 500×500 canvas.
-  - [ ] Draw walls in black and the background in white.
+- [x] **Rendering Function**
+  - [x] Write a function to draw the maze on the canvas.
+  - [x] Calculate cell size dynamically to fit the 500×500 canvas.
+  - [x] Draw walls in black and the background in white.
 
-- [ ] **Visual Testing**
-  - [ ] Render a generated maze to verify correctness.
-  - [ ] Confirm that wall thickness and alignment are consistent.
+- [x] **Visual Testing**
+  - [x] Render a generated maze to verify correctness.
+  - [x] Confirm that wall thickness and alignment are consistent.
 
 ## 4. Player Movement Implementation
 - [ ] **Player Object**
