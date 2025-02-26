@@ -6,9 +6,11 @@ export const mySketch = (p) => {
   let player;
   let gameState = 'playing'; // playing, won, countdown
   let countdownTime = 0;
-  const mazeSize = 15; // Initial maze size
+  let mazeSize = 50; // Initial maze size
   const padding = 50; // Padding around the maze
   const countdownDuration = 5; // seconds
+  let difficultySlider;
+  let winCount = 0;
   const keys = {
     UP: 38,
     RIGHT: 39,
@@ -20,6 +22,17 @@ export const mySketch = (p) => {
     p.createCanvas(window.innerWidth, window.innerHeight);
     p.strokeWeight(2);
     p.background(255);
+    
+    // Create difficulty slider
+    difficultySlider = p.createSlider(50, 200, mazeSize, 10);
+    difficultySlider.position(20, 20);
+    difficultySlider.style('width', '200px');
+    difficultySlider.input(() => {
+      if (gameState !== 'won') {
+        mazeSize = difficultySlider.value();
+        resetMaze();
+      }
+    });
     
     // Generate initial maze
     maze = generateMaze(mazeSize, mazeSize);
@@ -44,6 +57,14 @@ export const mySketch = (p) => {
 
   p.draw = () => {
     p.background(255);
+    
+    // Display win counter
+    p.textAlign(p.LEFT, p.TOP);
+    p.textSize(16);
+    p.fill(0);
+    p.noStroke();
+    p.text(`Wins: ${winCount}`, 20, 50);
+    p.text(`Maze Size: ${maze.width}x${maze.height}`, 20, 70);
     
     // Center the maze
     p.push();
@@ -106,6 +127,9 @@ export const mySketch = (p) => {
     if (player.x === maze.end.x && player.y === maze.end.y && gameState === 'playing') {
       gameState = 'won';
       countdownTime = p.millis() + (countdownDuration * 1000);
+      winCount++;
+      // Hide slider during countdown
+      difficultySlider.style('visibility', 'hidden');
       console.log('Won! Starting countdown...');
     }
 
@@ -115,13 +139,11 @@ export const mySketch = (p) => {
       
       if (timeLeft <= 0) {
         // Reset game with larger maze
-        const newSize = Math.min(maze.width + 10, 100);
-        maze = generateMaze(newSize, newSize);
-        player = {
-          x: maze.start.x,
-          y: maze.start.y
-        };
-        gameState = 'playing';
+        mazeSize = Math.min(maze.width + 10, 200);
+        difficultySlider.value(mazeSize);
+        // Show slider again
+        difficultySlider.style('visibility', 'visible');
+        resetMaze();
       } else {
         // Draw win message and countdown
         p.textAlign(p.CENTER, p.CENTER);
@@ -137,6 +159,27 @@ export const mySketch = (p) => {
     p.pop();
   };
 
+  // Function to reset the maze
+  const resetMaze = () => {
+    maze = generateMaze(mazeSize, mazeSize);
+    
+    // Recalculate cell size
+    const availableWidth = p.width - (padding * 2);
+    const availableHeight = p.height - (padding * 2);
+    cellSize = Math.min(
+      availableWidth / maze.width,
+      availableHeight / maze.height
+    );
+    
+    // Reset player position
+    player = {
+      x: maze.start.x,
+      y: maze.start.y
+    };
+    
+    gameState = 'playing';
+  };
+
   p.windowResized = () => {
     p.resizeCanvas(window.innerWidth, window.innerHeight);
     // Recalculate cell size
@@ -150,11 +193,9 @@ export const mySketch = (p) => {
 
   // Generate new maze on mouse click
   p.mouseClicked = () => {
-    maze = generateMaze(mazeSize, mazeSize);
-    player = {
-      x: maze.start.x,
-      y: maze.start.y
-    };
+    if (gameState !== 'won') {
+      resetMaze();
+    }
   };
 
   // Handle keyboard input for player movement
