@@ -34,6 +34,13 @@ export const mySketch = (p) => {
       }
     });
     
+    // Add label for the slider
+    p.textAlign(p.LEFT, p.TOP);
+    p.textSize(16);
+    p.fill(0);
+    p.noStroke();
+    p.text('Maze Size:', 20, 5);
+    
     // Generate initial maze
     maze = generateMaze(mazeSize, mazeSize);
     
@@ -161,23 +168,34 @@ export const mySketch = (p) => {
 
   // Function to reset the maze
   const resetMaze = () => {
-    maze = generateMaze(mazeSize, mazeSize);
+    // Show generating message
+    p.background(255);
+    p.textAlign(p.CENTER, p.CENTER);
+    p.textSize(24);
+    p.fill(0);
+    p.noStroke();
+    p.text('Generating new maze...', p.width/2, p.height/2);
     
-    // Recalculate cell size
-    const availableWidth = p.width - (padding * 2);
-    const availableHeight = p.height - (padding * 2);
-    cellSize = Math.min(
-      availableWidth / maze.width,
-      availableHeight / maze.height
-    );
-    
-    // Reset player position
-    player = {
-      x: maze.start.x,
-      y: maze.start.y
-    };
-    
-    gameState = 'playing';
+    // Use setTimeout to allow the message to be displayed before generating the maze
+    setTimeout(() => {
+      maze = generateMaze(mazeSize, mazeSize);
+      
+      // Recalculate cell size
+      const availableWidth = p.width - (padding * 2);
+      const availableHeight = p.height - (padding * 2);
+      cellSize = Math.min(
+        availableWidth / maze.width,
+        availableHeight / maze.height
+      );
+      
+      // Reset player position
+      player = {
+        x: maze.start.x,
+        y: maze.start.y
+      };
+      
+      gameState = 'playing';
+    }, 100); // Short delay to ensure message is visible
   };
 
   p.windowResized = () => {
