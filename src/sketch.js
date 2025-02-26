@@ -6,6 +6,12 @@ export const mySketch = (p) => {
   let player;
   const mazeSize = 15; // Initial maze size
   const padding = 50; // Padding around the maze
+  const keys = {
+    UP: 38,
+    RIGHT: 39,
+    DOWN: 40,
+    LEFT: 37
+  };
 
   p.setup = () => {
     p.createCanvas(window.innerWidth, window.innerHeight);
@@ -114,5 +120,36 @@ export const mySketch = (p) => {
       x: maze.start.x,
       y: maze.start.y
     };
+  };
+
+  // Handle keyboard input for player movement
+  p.keyPressed = () => {
+    const currentCell = maze.grid[player.y][player.x];
+    
+    switch (p.keyCode) {
+      case keys.UP:
+        if (!currentCell.walls.top) {
+          player.y--;
+        }
+        break;
+      case keys.RIGHT:
+        if (!currentCell.walls.right) {
+          player.x++;
+        }
+        break;
+      case keys.DOWN:
+        if (!currentCell.walls.bottom) {
+          player.y++;
+        }
+        break;
+      case keys.LEFT:
+        if (!currentCell.walls.left) {
+          player.x--;
+        }
+        break;
+    }
+    
+    // Prevent default behavior for arrow keys
+    return false;
   };
 };

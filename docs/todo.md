@@ -49,14 +49,14 @@
   - [x] Create a player object (green dot) with an initial position.
   - [x] Ensure starting position is near one side of the maze.
 
-- [ ] **Event Listeners**
-  - [ ] Set up key event listeners for arrow keys.
-  - [ ] Verify that key events are correctly captured.
+- [x] **Event Listeners**
+  - [x] Set up key event listeners for arrow keys.
+  - [x] Verify that key events are correctly captured.
 
-- [ ] **Movement Logic**
-  - [ ] Move the player one cell at a time in cardinal directions.
-  - [ ] Check for walls and only allow valid moves.
-  - [ ] Log movement events to validate behavior.
+- [x] **Movement Logic**
+  - [x] Move the player one cell at a time in cardinal directions.
+  - [x] Check for walls and only allow valid moves.
+  - [x] Log movement events to validate behavior.
 
 ## 5. Win Condition and Game Loop
 - [ ] **Finish Square**
