@@ -1,38 +1,38 @@
 # Maze-Solving Game TODO Checklist
 
 ## 1. Project Setup
-- [ ] **Folder Structure**
-  - [ ] Create project directory.
-  - [ ] Create `index.html`.
-  - [ ] Create `styles.css`.
-  - [ ] Create `main.js`.
+- [x] **Folder Structure**
+  - [x] Create project directory.
+  - [x] Create `index.html`.
+  - [x] Create `styles.css`.
+  - [x] Create `main.js`.
 
 - [ ] **HTML Setup**
-  - [ ] Link the p5.js library.
-  - [ ] Link `main.js` and `styles.css`.
-  - [ ] Add a container element for the canvas.
+  - [x] Link the p5.js library.
+  - [x] Link `main.js` and `styles.css`.
+  - [x] Add a container element for the canvas.
 
-- [ ] **CSS Setup**
-  - [ ] Basic styling for page layout.
-  - [ ] Ensure canvas container is centered and sized correctly.
+- [x] **CSS Setup**
+  - [x] Basic styling for page layout.
+  - [x] Ensure canvas container is centered and sized correctly.
 
 - [ ] **p5.js Initialization**
   - [ ] Set up a 500×500 canvas in `main.js`.
   - [ ] Display a test message (e.g., “Hello, Canvas!”) on the canvas.
 
 ## 2. Maze Generation Module
-- [ ] **Define Maze Data Structure**
-  - [ ] Represent the maze as a grid of cells.
-  - [ ] Each cell should store wall data (top, right, bottom, left).
+- [x] **Define Maze Data Structure**
+  - [x] Represent the maze as a grid of cells.
+  - [x] Each cell should store wall data (top, right, bottom, left).
 
-- [ ] **Grid Initialization**
-  - [ ] Create a function to initialize the grid for a given maze size.
-  - [ ] Validate the grid dimensions based on input maze size.
+- [x] **Grid Initialization**
+  - [x] Create a function to initialize the grid for a given maze size.
+  - [x] Validate the grid dimensions based on input maze size.
 
-- [ ] **DFS Maze Generation Algorithm**
-  - [ ] Implement DFS with backtracking to carve passages.
-  - [ ] Ensure the algorithm always produces a solvable maze.
-  - [ ] Log or test that the maze is correctly generated.
+- [x] **DFS Maze Generation Algorithm**
+  - [x] Implement DFS with backtracking to carve passages.
+  - [x] Ensure the algorithm always produces a solvable maze.
+  - [x] Log or test that the maze is correctly generated.
 
 ## 3. Maze Rendering with p5.js
 - [ ] **Rendering Function**
