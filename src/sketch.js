@@ -27,8 +27,20 @@ export const mySketch = (p) => {
     difficultySlider = p.createSlider(50, 200, mazeSize, 10);
     difficultySlider.position(20, 20);
     difficultySlider.style('width', '200px');
+
+    // Use both input and changed events to ensure it works
     difficultySlider.input(() => {
       if (gameState !== 'won') {
+        console.log('Slider value changed to:', difficultySlider.value());
+        mazeSize = difficultySlider.value();
+        resetMaze();
+      }
+    });
+
+    // Also add changed event as a backup
+    difficultySlider.changed(() => {
+      if (gameState !== 'won') {
+        console.log('Slider value changed (changed event) to:', difficultySlider.value());
         mazeSize = difficultySlider.value();
         resetMaze();
       }
@@ -176,9 +188,13 @@ export const mySketch = (p) => {
     p.noStroke();
     p.text('Generating new maze...', p.width/2, p.height/2);
     
-    // Use setTimeout to allow the message to be displayed before generating the maze
-    setTimeout(() => {
+    console.log('Generating new maze with size:', mazeSize);
+    
+    // Use requestAnimationFrame instead of setTimeout for better browser compatibility
+    requestAnimationFrame(() => {
       maze = generateMaze(mazeSize, mazeSize);
+      
+      console.log('New maze generated with dimensions:', maze.width, 'x', maze.height);
       
       // Recalculate cell size
       const availableWidth = p.width - (padding * 2);
@@ -195,7 +211,7 @@ export const mySketch = (p) => {
       };
       
       gameState = 'playing';
-    }, 100); // Short delay to ensure message is visible
+    });
   };
 
   p.windowResized = () => {
@@ -219,7 +235,12 @@ export const mySketch = (p) => {
   // Handle keyboard input for player movement
   p.keyPressed = () => {
     // Disable movement during countdown
-    if (gameState !== 'playing') return false;
+    if (gameState !== 'playing') return true; // Return true for non-game keys during countdown
+    
+    // Only handle arrow keys, let other keys pass through
+    if (![keys.UP, keys.RIGHT, keys.DOWN, keys.LEFT].includes(p.keyCode)) {
+      return true; // Let browser handle non-arrow keys
+    }
     
     const currentCell = maze.grid[player.y][player.x];
     
@@ -246,7 +267,7 @@ export const mySketch = (p) => {
         break;
     }
     
-    // Prevent default behavior for arrow keys
+    // Prevent default behavior only for arrow keys
     return false;
   };
 };
