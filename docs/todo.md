@@ -45,9 +45,9 @@
   - [x] Confirm that wall thickness and alignment are consistent.
 
 ## 4. Player Movement Implementation
-- [ ] **Player Object**
-  - [ ] Create a player object (green dot) with an initial position.
-  - [ ] Ensure starting position is near one side of the maze.
+- [x] **Player Object**
+  - [x] Create a player object (green dot) with an initial position.
+  - [x] Ensure starting position is near one side of the maze.
 
 - [ ] **Event Listeners**
   - [ ] Set up key event listeners for arrow keys.

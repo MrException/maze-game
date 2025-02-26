@@ -3,6 +3,7 @@ import { generateMaze } from './maze-generator';
 export const mySketch = (p) => {
   let maze;
   let cellSize;
+  let player;
   const mazeSize = 15; // Initial maze size
   const padding = 50; // Padding around the maze
 
@@ -22,7 +23,14 @@ export const mySketch = (p) => {
       availableHeight / maze.height
     );
     
+    // Initialize player at the start position
+    player = {
+      x: maze.start.x,
+      y: maze.start.y
+    };
+    
     console.log('Maze generation complete!');
+    console.log('Player starting at:', player);
   };
 
   p.draw = () => {
@@ -76,6 +84,15 @@ export const mySketch = (p) => {
       cellSize/2
     );
     
+    // Draw player (green dot)
+    p.noStroke();
+    p.fill(0, 255, 0);
+    p.circle(
+      player.x * cellSize + cellSize/2,
+      player.y * cellSize + cellSize/2,
+      cellSize * 0.8
+    );
+    
     p.pop();
   };
 
@@ -93,5 +110,9 @@ export const mySketch = (p) => {
   // Generate new maze on mouse click
   p.mouseClicked = () => {
     maze = generateMaze(mazeSize, mazeSize);
+    player = {
+      x: maze.start.x,
+      y: maze.start.y
+    };
   };
 };
