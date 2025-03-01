@@ -6,7 +6,7 @@ export const mySketch = (p) => {
   let player;
   let gameState = 'playing'; // playing, won, countdown
   let countdownTime = 0;
-  let mazeSize = 50; // Initial maze size
+  let mazeSize = 10; // Initial maze size
   const padding = 50; // Padding around the maze
   const countdownDuration = 5; // seconds
   let difficultySlider;
@@ -24,7 +24,7 @@ export const mySketch = (p) => {
     p.background(255);
     
     // Create difficulty slider
-    difficultySlider = p.createSlider(50, 200, mazeSize, 10);
+    difficultySlider = p.createSlider(10, 100, mazeSize, 10);
     difficultySlider.position(20, 20);
     difficultySlider.style('width', '200px');
 
