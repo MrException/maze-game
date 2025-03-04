@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../src/index.css"],
+  "sourcesContent": ["html,\nbody {\n  font-family: \"Helvetica\";\n  margin: 0;\n  padding: 0;\n  width: 100%;\n  height: 100%;\n  overflow: hidden;\n}\n"],
+  "mappings": "AAAA,KACA,KACE,YAAa,UAFf,OAGU,EAHV,QAIW,EACT,MAAO,KACP,OAAQ,KACR,SAAU,MACZ",
+  "names": []
+}
