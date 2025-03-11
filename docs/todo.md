@@ -74,16 +74,16 @@
   - [x] Log and test the entire game loop.
 
 ## 6. Difficulty Slider and UI Enhancements
-- [ ] **Difficulty Slider**
-  - [ ] Add an HTML slider (range input) for maze size (50×50 to 200×200).
-  - [ ] Style the slider appropriately in CSS.
+- [x] **Difficulty Slider**
+  - [x] Add an HTML slider (range input) for maze size (50×50 to 200×200).
+  - [x] Style the slider appropriately in CSS.
 
-- [ ] **Slider Event Handling**
-  - [ ] On slider change, clear the current maze.
-  - [ ] Display a “Generating new maze…” message.
-  - [ ] Hide the slider during the 5-second countdown.
-  - [ ] Generate and render the new maze after the countdown.
-  - [ ] Re-display the slider after new maze generation.
+- [x] **Slider Event Handling**
+  - [x] On slider change, clear the current maze.
+  - [x] Display a “Generating new maze…” message.
+  - [x] Hide the slider during the 5-second countdown.
+  - [x] Generate and render the new maze after the countdown.
+  - [x] Re-display the slider after new maze generation.
 
 - [ ] **Win Counter**
   - [ ] Add a win counter display.
