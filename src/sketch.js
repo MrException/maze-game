@@ -23,10 +23,10 @@ export const mySketch = (p) => {
     p.strokeWeight(2);
     p.background(255);
     
-    // Create difficulty slider
-    difficultySlider = p.createSlider(10, 200, mazeSize, 10);
-    difficultySlider.position(20, 20);
-    difficultySlider.style('width', '200px');
+    // Create difficulty slider - positioned at bottom of screen and full width
+    difficultySlider = p.createSlider(10, 200, mazeSize, 1); // Changed step to 1 for finer control
+    difficultySlider.position(20, p.height - 40); // Position at bottom with some padding
+    difficultySlider.style('width', `${p.width - 40}px`); // Make it almost full width
 
     // Use both input and changed events to ensure it works
     difficultySlider.input(() => {
@@ -46,12 +46,12 @@ export const mySketch = (p) => {
       }
     });
     
-    // Add label for the slider
-    p.textAlign(p.LEFT, p.TOP);
+    // Add label for the slider at the bottom
+    p.textAlign(p.LEFT, p.BOTTOM);
     p.textSize(16);
     p.fill(0);
     p.noStroke();
-    p.text('Maze Size:', 20, 5);
+    p.text('Maze Size:', 20, p.height - 45);
     
     // Generate initial maze
     maze = generateMaze(mazeSize, mazeSize);
@@ -223,6 +223,10 @@ export const mySketch = (p) => {
       availableWidth / maze.width,
       availableHeight / maze.height
     );
+    
+    // Update slider position and width when window is resized
+    difficultySlider.position(20, p.height - 40);
+    difficultySlider.style('width', `${p.width - 40}px`);
   };
 
   // Generate new maze on mouse click
