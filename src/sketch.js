@@ -24,7 +24,7 @@ export const mySketch = (p) => {
     p.background(255);
     
     // Create difficulty slider
-    difficultySlider = p.createSlider(10, 100, mazeSize, 10);
+    difficultySlider = p.createSlider(10, 200, mazeSize, 10);
     difficultySlider.position(20, 20);
     difficultySlider.style('width', '200px');
 
