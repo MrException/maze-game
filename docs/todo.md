@@ -85,9 +85,9 @@
   - [x] Generate and render the new maze after the countdown.
   - [x] Re-display the slider after new maze generation.
 
-- [ ] **Win Counter**
-  - [ ] Add a win counter display.
-  - [ ] Update the win counter each time the player wins.
+- [x] **Win Counter**
+  - [x] Add a win counter display.
+  - [x] Update the win counter each time the player wins.
 
 ## 7. Debugging Tools and Testing
 - [ ] **Instant Completion Tool**
