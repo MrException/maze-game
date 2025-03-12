@@ -47,11 +47,8 @@ export const mySketch = (p) => {
       }
     };
     
-    touchControls.onTouchClick = () => {
-      if (gameState !== 'won') {
-        resetMaze();
-      }
-    };
+    // Remove the touch click handler that regenerates the maze
+    touchControls.onTouchClick = null;
     
     // Create difficulty slider - positioned at bottom of screen and full width
     difficultySlider = p.createSlider(10, 200, mazeSize, 1); // Changed step to 1 for finer control

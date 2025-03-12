@@ -134,11 +134,8 @@ export class TouchControls {
     } else if (this.isPointInRect(x, y, this.touchButtons.left)) {
       if (this.onDirectionChange) this.onDirectionChange('LEFT', true);
       return true;
-    } else if (this.onTouchClick) {
-      // If touch is not on a button, treat it as a click
-      this.onTouchClick(x, y);
-      return true;
     }
+    // Removed the onTouchClick handler
     
     return false;
   }
