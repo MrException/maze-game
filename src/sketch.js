@@ -278,13 +278,6 @@ export const mySketch = (p) => {
     touchControls.resize();
   };
 
-  // Generate new maze on mouse click
-  p.mouseClicked = () => {
-    if (gameState !== 'won') {
-      resetMaze();
-    }
-  };
-
   // Function to handle continuous movement
   const handleContinuousMovement = () => {
     const currentCell = maze.grid[player.y][player.x];
