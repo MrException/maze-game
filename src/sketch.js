@@ -8,7 +8,7 @@ export const mySketch = (p) => {
   let gameState = 'playing'; // playing, won, countdown
   let countdownTime = 0;
   let mazeSize = 10; // Initial maze size
-  const padding = 50; // Padding around the maze
+  const padding = { top: 80, bottom: 100, left: 50, right: 50 }; // Adjusted padding to move maze up
   const countdownDuration = 2; // seconds
   let difficultySlider;
   let winCount = 0;
@@ -84,8 +84,8 @@ export const mySketch = (p) => {
     maze = generateMaze(mazeSize, mazeSize);
     
     // Calculate cell size to fit maze in canvas with padding
-    const availableWidth = p.width - (padding * 2);
-    const availableHeight = p.height - (padding * 2);
+    const availableWidth = p.width - (padding.left + padding.right);
+    const availableHeight = p.height - (padding.top + padding.bottom);
     cellSize = Math.min(
       availableWidth / maze.width,
       availableHeight / maze.height
@@ -117,11 +117,11 @@ export const mySketch = (p) => {
     p.text(`Wins: ${winCount}`, 20, 50);
     p.text(`Maze Size: ${maze.width}x${maze.height}`, 20, 70);
     
-    // Center the maze
+    // Center the maze horizontally and position it higher vertically
     p.push();
     p.translate(
       (p.width - (maze.width * cellSize)) / 2,
-      (p.height - (maze.height * cellSize)) / 2
+      padding.top
     );
     
     // Draw maze
@@ -258,8 +258,8 @@ export const mySketch = (p) => {
   p.windowResized = () => {
     p.resizeCanvas(window.innerWidth, window.innerHeight);
     // Recalculate cell size
-    const availableWidth = p.width - (padding * 2);
-    const availableHeight = p.height - (padding * 2);
+    const availableWidth = p.width - (padding.left + padding.right);
+    const availableHeight = p.height - (padding.top + padding.bottom);
     cellSize = Math.min(
       availableWidth / maze.width,
       availableHeight / maze.height

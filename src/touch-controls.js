@@ -31,13 +31,14 @@ export class TouchControls {
     // Make buttons smaller on mobile
     const buttonSize = Math.min(this.p.width, this.p.height) * 0.12;
     
-    // Position in bottom left corner with padding
+    // Position in center-right of screen
     const padding = buttonSize * 0.5;
-    const centerX = padding + buttonSize * 1.5;
-    const centerY = this.p.height - padding - buttonSize * 1.5;
+    const centerX = this.p.width - buttonSize * 3;
+    const centerY = this.p.height - buttonSize * 4; // Higher up to avoid slider
     
+    // Arrange in a proper cross pattern
     this.touchButtons.up = { 
-      x: centerX - buttonSize/2, 
+      x: centerX, 
       y: centerY - buttonSize, 
       width: buttonSize, 
       height: buttonSize 
@@ -49,7 +50,7 @@ export class TouchControls {
       height: buttonSize 
     };
     this.touchButtons.down = { 
-      x: centerX - buttonSize/2, 
+      x: centerX, 
       y: centerY + buttonSize, 
       width: buttonSize, 
       height: buttonSize 
