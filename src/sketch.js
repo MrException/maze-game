@@ -9,7 +9,7 @@ export const mySketch = (p) => {
   let countdownTime = 0;
   let mazeSize = 10; // Initial maze size
   const padding = 50; // Padding around the maze
-  const countdownDuration = 5; // seconds
+  const countdownDuration = 2; // seconds
   let difficultySlider;
   let winCount = 0;
   let touchControls;
