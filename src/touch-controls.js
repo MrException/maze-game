@@ -28,31 +28,35 @@ export class TouchControls {
   }
 
   positionTouchButtons() {
-    const buttonSize = Math.min(this.p.width, this.p.height) * 0.15;
-    const centerX = this.p.width * 0.85;
-    const centerY = this.p.height * 0.7;
+    // Make buttons smaller on mobile
+    const buttonSize = Math.min(this.p.width, this.p.height) * 0.12;
+    
+    // Position in bottom left corner with padding
+    const padding = buttonSize * 0.5;
+    const centerX = padding + buttonSize * 1.5;
+    const centerY = this.p.height - padding - buttonSize * 1.5;
     
     this.touchButtons.up = { 
       x: centerX - buttonSize/2, 
-      y: centerY - buttonSize * 1.5, 
+      y: centerY - buttonSize, 
       width: buttonSize, 
       height: buttonSize 
     };
     this.touchButtons.right = { 
-      x: centerX + buttonSize/2, 
-      y: centerY - buttonSize/2, 
+      x: centerX + buttonSize, 
+      y: centerY, 
       width: buttonSize, 
       height: buttonSize 
     };
     this.touchButtons.down = { 
       x: centerX - buttonSize/2, 
-      y: centerY + buttonSize/2, 
+      y: centerY + buttonSize, 
       width: buttonSize, 
       height: buttonSize 
     };
     this.touchButtons.left = { 
-      x: centerX - buttonSize * 1.5, 
-      y: centerY - buttonSize/2, 
+      x: centerX - buttonSize, 
+      y: centerY, 
       width: buttonSize, 
       height: buttonSize 
     };

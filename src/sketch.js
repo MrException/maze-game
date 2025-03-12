@@ -214,8 +214,6 @@ export const mySketch = (p) => {
         p.text(`New maze in ${timeLeft}...`, p.width/2, p.height/2 + 20);
       }
     }
-
-    p.pop();
   };
 
   // Function to reset the maze
