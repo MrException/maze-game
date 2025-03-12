@@ -1,4 +1,5 @@
 import { generateMaze } from './maze-generator';
+import { TouchControls } from './touch-controls';
 
 export const mySketch = (p) => {
   let maze;
@@ -11,6 +12,7 @@ export const mySketch = (p) => {
   const countdownDuration = 5; // seconds
   let difficultySlider;
   let winCount = 0;
+  let touchControls;
   const keys = {
     UP: 38,
     RIGHT: 39,
@@ -32,6 +34,24 @@ export const mySketch = (p) => {
     p.createCanvas(window.innerWidth, window.innerHeight);
     p.strokeWeight(2);
     p.background(255);
+    
+    // Initialize touch controls
+    touchControls = new TouchControls(p);
+    const hasTouchControls = touchControls.init();
+    
+    // Set up callbacks for touch controls
+    touchControls.onDirectionChange = (direction, isPressed) => {
+      keysPressed[direction] = isPressed;
+      if (isPressed && gameState === 'playing') {
+        handleContinuousMovement();
+      }
+    };
+    
+    touchControls.onTouchClick = () => {
+      if (gameState !== 'won') {
+        resetMaze();
+      }
+    };
     
     // Create difficulty slider - positioned at bottom of screen and full width
     difficultySlider = p.createSlider(10, 200, mazeSize, 1); // Changed step to 1 for finer control
@@ -248,6 +268,9 @@ export const mySketch = (p) => {
     // Update slider position and width when window is resized
     difficultySlider.position(20, p.height - 40);
     difficultySlider.style('width', `${p.width - 40}px`);
+    
+    // Update touch controls
+    touchControls.resize();
   };
 
   // Generate new maze on mouse click
@@ -335,5 +358,25 @@ export const mySketch = (p) => {
     
     // Let other keys pass through
     return true;
+  };
+  
+  // Handle touch events
+  p.touchStarted = () => {
+    if (p.touches.length > 0) {
+      touchControls.handleTouchStart(p.touches[0].x, p.touches[0].y);
+    }
+    return false; // Prevent default
+  };
+  
+  p.touchEnded = () => {
+    touchControls.handleTouchEnd();
+    return false; // Prevent default
+  };
+  
+  p.touchMoved = () => {
+    if (p.touches.length > 0) {
+      touchControls.handleTouchMove(p.touches[0].x, p.touches[0].y);
+    }
+    return false; // Prevent default
   };
 };
