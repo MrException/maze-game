@@ -172,8 +172,8 @@ export const mySketch = (p) => {
       const timeLeft = Math.ceil((countdownTime - p.millis()) / 1000);
       
       if (timeLeft <= 0) {
-        // Reset game with larger maze
-        mazeSize = Math.min(maze.width + 10, 200);
+        // Reset game with slightly larger maze (increase by 2 instead of 10)
+        mazeSize = Math.min(maze.width + 2, 200);
         difficultySlider.value(mazeSize);
         // Show slider again
         difficultySlider.style('visibility', 'visible');
