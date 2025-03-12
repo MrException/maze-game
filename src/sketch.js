@@ -17,6 +17,16 @@ export const mySketch = (p) => {
     DOWN: 40,
     LEFT: 37
   };
+  // Track which keys are currently pressed
+  const keysPressed = {
+    UP: false,
+    RIGHT: false,
+    DOWN: false,
+    LEFT: false
+  };
+  // Movement cooldown to control speed
+  let lastMoveTime = 0;
+  const moveCooldown = 100; // milliseconds between moves
 
   p.setup = () => {
     p.createCanvas(window.innerWidth, window.innerHeight);
@@ -76,6 +86,11 @@ export const mySketch = (p) => {
 
   p.draw = () => {
     p.background(255);
+    
+    // Handle continuous movement when keys are held down
+    if (gameState === 'playing' && p.millis() - lastMoveTime > moveCooldown) {
+      handleContinuousMovement();
+    }
     
     // Display win counter
     p.textAlign(p.LEFT, p.TOP);
@@ -180,6 +195,12 @@ export const mySketch = (p) => {
 
   // Function to reset the maze
   const resetMaze = () => {
+    // Reset all key states
+    keysPressed.UP = false;
+    keysPressed.RIGHT = false;
+    keysPressed.DOWN = false;
+    keysPressed.LEFT = false;
+    
     // Show generating message
     p.background(255);
     p.textAlign(p.CENTER, p.CENTER);
@@ -236,7 +257,32 @@ export const mySketch = (p) => {
     }
   };
 
-  // Handle keyboard input for player movement
+  // Function to handle continuous movement
+  const handleContinuousMovement = () => {
+    const currentCell = maze.grid[player.y][player.x];
+    let moved = false;
+    
+    // Process movement in priority order (first pressed key gets priority)
+    if (keysPressed.UP && !currentCell.walls.top) {
+      player.y--;
+      moved = true;
+    } else if (keysPressed.RIGHT && !currentCell.walls.right) {
+      player.x++;
+      moved = true;
+    } else if (keysPressed.DOWN && !currentCell.walls.bottom) {
+      player.y++;
+      moved = true;
+    } else if (keysPressed.LEFT && !currentCell.walls.left) {
+      player.x--;
+      moved = true;
+    }
+    
+    if (moved) {
+      lastMoveTime = p.millis();
+    }
+  };
+
+  // Handle key press events
   p.keyPressed = () => {
     // Disable movement during countdown
     if (gameState !== 'playing') return true; // Return true for non-game keys during countdown
@@ -246,32 +292,48 @@ export const mySketch = (p) => {
       return true; // Let browser handle non-arrow keys
     }
     
-    const currentCell = maze.grid[player.y][player.x];
-    
+    // Set the key as pressed
     switch (p.keyCode) {
       case keys.UP:
-        if (!currentCell.walls.top) {
-          player.y--;
-        }
+        keysPressed.UP = true;
         break;
       case keys.RIGHT:
-        if (!currentCell.walls.right) {
-          player.x++;
-        }
+        keysPressed.RIGHT = true;
         break;
       case keys.DOWN:
-        if (!currentCell.walls.bottom) {
-          player.y++;
-        }
+        keysPressed.DOWN = true;
         break;
       case keys.LEFT:
-        if (!currentCell.walls.left) {
-          player.x--;
-        }
+        keysPressed.LEFT = true;
         break;
     }
     
+    // Force an immediate move when key is first pressed
+    handleContinuousMovement();
+    
     // Prevent default behavior only for arrow keys
     return false;
+  };
+  
+  // Handle key release events
+  p.keyReleased = () => {
+    // Only handle arrow keys
+    switch (p.keyCode) {
+      case keys.UP:
+        keysPressed.UP = false;
+        break;
+      case keys.RIGHT:
+        keysPressed.RIGHT = false;
+        break;
+      case keys.DOWN:
+        keysPressed.DOWN = false;
+        break;
+      case keys.LEFT:
+        keysPressed.LEFT = false;
+        break;
+    }
+    
+    // Let other keys pass through
+    return true;
   };
 };
