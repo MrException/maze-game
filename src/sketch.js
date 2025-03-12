@@ -177,6 +177,11 @@ export const mySketch = (p) => {
       cellSize * 0.8
     );
     
+    p.pop();
+    
+    // Draw touch controls (after popping the matrix)
+    touchControls.draw();
+    
     // Check win condition
     if (player.x === maze.end.x && player.y === maze.end.y && gameState === 'playing') {
       gameState = 'won';
